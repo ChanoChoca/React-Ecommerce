@@ -1,13 +1,14 @@
-import NavBar from "./components/NavBar/NavBar.jsx";
-import ItemListContainer from "./components/ItemListContainer/ItemListContainer.jsx";
-
+import {NavBar} from "./components/NavBar/NavBar.jsx";
+import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer.jsx";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
+
     return (
-        <div>
+        <>
             <NavBar/>
-            <ItemListContainer message="Mensaje enviado desde App.jsx"/>
-        </div>
+            <ItemListContainer/>
+        </>
     );
 };
 
