@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar__logo {
+    width: 70px;
+}
+
+header .navbar-collapse {
+    transition: 1s;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bolder !important;
+    color: #000;
+}
+
+.subrayado {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.nav-link:hover, .subrayado:hover {
+    color: #f00822;
+}
+
+.nav-link::before, .subrayado::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #f00822;
+    transition: width 0.3s ease;
+}

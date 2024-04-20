@@ -1,27 +1,30 @@
 /* import styles from './ItemListContainer.module.css' */
 
-export const ItemListContainer = ( ) => {
+import {useEffect, useState} from "react";
+import {getProducts} from "../../utils/MockData.js";
+import {ItemList} from "../ItemList/ItemList.jsx";
+
+export const ItemListContainer = ({ bgBlue, greeting } ) => {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        getProducts()
+            .then((res) => {
+                setProducts(res)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
+    const defaultTitle = "Default title"
 
     return (
         <main>
-            {/* TODO: carousel */}
-
-            <section className="container text-center">
-                <h2>Nuestros productos más nuevos</h2>
-
-                <hr/>
-                {/* TODO: cards with new products (another component) */}
-                <hr/>
-            </section>
-
-            <section className="container text-center">
-                {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <h2>Productos más vendidos</h2>
-
-                <hr/>
-                {/* TODO: cards with top products (another component) */}
-                <hr/>
-            </section>
+            <h1 className={"text-center"}>{greeting ? greeting : defaultTitle}</h1>
+            <div>
+                <ItemList productsList={products}/>
+            </div>
         </main>
-    )
+    );
 }

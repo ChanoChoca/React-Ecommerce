@@ -1,16 +1,13 @@
-import {NavBar} from "./components/NavBar/NavBar.jsx";
-import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
+import {Home} from "./Pages/Home/Home.jsx";
 
 const App = () => {
 
     return (
         <>
-            <NavBar/>
-            <ItemListContainer/>
+            <Home/>
         </>
     );
 };
 
 export default App;
-
