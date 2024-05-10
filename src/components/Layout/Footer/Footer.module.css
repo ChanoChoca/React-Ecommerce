@@ -1,4 +1,13 @@
 .bgColor {
-    background-color: #FEFAE0;
+    background-color: #000;
     text-align: center;
+    color: #dad7d6;
+}
+
+.link {
+    color: #dad7d6;
+}
+
+.link:hover {
+    color: #fff;
 }

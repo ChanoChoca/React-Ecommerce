@@ -1,6 +1,7 @@
 import {useState} from "react";
+import styles from "./ItemCount.module.css";
 
-export const ItemCount = () => {
+export const ItemCount = ({stock}) => {
     const [cantItems, setCantItems] = useState(0)
 
     const handleAdd = () => {
@@ -13,12 +14,18 @@ export const ItemCount = () => {
         }
     }
 
+    const handleAddToCart = () => {
+        console.log(`Se agregaron ${cantItems} al carrito`);
+    };
+
     return (
         <>
-            <div>ItemCount</div>
-            <button onClick={handleAdd}> + </button>
-            <span>{cantItems}</span>
-            <button onClick={handleSub}> - </button>
+            <div>
+                <button onClick={handleSub} className={"me-1 " + styles.btn_pseudoclase}> - </button>
+                <span>{cantItems}</span>
+                <button onClick={handleAdd} className={"ms-1 " + styles.btn_pseudoclase} > + </button>
+            </div>
+            <button onClick={handleAddToCart} className={"mt-3 " + styles.btn_pseudoclase}>Agregar al carrito</button>
         </>
     );
 }

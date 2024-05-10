@@ -1,24 +1,5 @@
-.card {
-    background-color: transparent;
-    border: 0;
-    color: #fff;
-    text-align: center;
-}
-
-.item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ccc;
-    width: 250px;
-    height: 300px;
-    border-radius: 15px;
-    padding: 10px;
-    margin: auto;
-}
-
 .btn_pseudoclase {
+    display: inline-block;
     background-color: #fff;
     color: rgb(242, 100, 2);
     border: 2px solid rgb(242, 100, 2);
