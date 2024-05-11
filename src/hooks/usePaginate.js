@@ -1,8 +1,6 @@
-import {useState} from "react";
+import { useState } from "react";
 
-export const usePaginate = (data, itemsPerPage) => {
-    const [currentPage, setCurrentPage] = useState(1);
-
+export const usePaginate = (data, itemsPerPage, currentPage, setCurrentPage) => {
     const totalPages = Math.ceil(data.length / itemsPerPage);
 
     const paginate = (numPage) => setCurrentPage(numPage);

@@ -1,8 +1,17 @@
 import { ItemCount } from "../ItemCount/ItemCount.jsx";
 import styles from "./ItemDetail.module.css";
 import Card from "react-bootstrap/Card";
+import {useCartContext} from "../../context/CartContext.jsx";
 
-export const ItemDetail = ({id, name, description, price, stock, category, image}) => {
+export const ItemDetail = (item) => {
+    const { id, name, description, price, category, image, stock } = item;
+
+    const { addToCart } = useCartContext();
+
+    const handleAddToCart = (cantItems) => {
+        addToCart(item, cantItems);
+    };
+
     return (
         <main className={"container"}>
             <div className={"row"}>
@@ -15,7 +24,9 @@ export const ItemDetail = ({id, name, description, price, stock, category, image
                     <div style={{display: stock !== undefined ? 'inline' : 'none'}}>
                         <p>Stock: {stock}</p>
                     </div>
-                    <ItemCount stock={stock} initial={1}/>
+                    <ItemCount stock={stock}
+                               initial={1}
+                               handleAddToCart={handleAddToCart}/>
                 </div>
             </div>
             <div>
