@@ -33,19 +33,45 @@ const CartContextProvider = ({ children }) => {
 
         if (isInCart(item.id)) {
             newCart = cart.map((elem) => {
-               if (elem.id === item.id)  {
-                   return { ...elem, qty: elem.qty + qty}
-               } else {
-                   return elem;
-               }
+                if (elem.id === item.id) {
+                    return { ...elem, qty: elem.qty + qty };
+                } else {
+                    return elem;
+                }
             });
             setCart(newCart);
         } else {
-            newCart = [...cart, { ...item, qty}];
+            newCart = [...cart, { ...item, qty }];
             setCart(newCart);
         }
 
         setCartToLocalStorage(newCart);
+    };
+
+    const addItem = (id, price) => {
+        const updatedCart = cart.map(item => {
+            if (item.id === id) {
+                return { ...item, qty: item.qty + 1 };
+            }
+            return item;
+        });
+        setCart(updatedCart);
+        setTotalQty(totalQty + 1);
+        setTotalPrice(totalPrice + price);
+        setCartToLocalStorage(updatedCart);
+    };
+
+    const removeOneItem = (id, price) => {
+        const updatedCart = cart.map(item => {
+            if (item.id === id && item.qty > 1) {
+                return { ...item, qty: item.qty - 1 };
+            }
+            return item;
+        });
+        setCart(updatedCart);
+        setTotalQty(totalQty - 1);
+        setTotalPrice(totalPrice - price);
+        setCartToLocalStorage(updatedCart);
     };
 
     const isInCart = (id) => {
@@ -82,7 +108,9 @@ const CartContextProvider = ({ children }) => {
         cart,
         addToCart,
         removeItem,
-        clearCart
+        clearCart,
+        addItem,
+        removeOneItem
     };
 
     return <Provider value={contextValue}>{children}</Provider>

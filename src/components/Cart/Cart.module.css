@@ -1,0 +1,15 @@
+.btn_pseudoclase {
+    background-color: #fff;
+    color: rgb(242, 100, 2);
+    border: 2px solid rgb(242, 100, 2);
+    border-radius: 0;
+    padding: 10px;
+    transition: 0.3s ease;
+}
+
+.btn_pseudoclase:hover, .btn_pseudoclase:active {
+    color: #ffffff !important;
+    background-color: rgb(242, 100, 2) !important;
+    border: 2px solid rgb(242, 100, 2) !important;
+    box-shadow: none;
+}
