@@ -32,7 +32,7 @@ const App = () => {
 
     return (
         <CartContextProvider>
-            <BrowserRouter>
+            <BrowserRouter basename="/React-Ecommerce">
                 <Routes>
                     <Route element={<Layout/>}>
                         <Route path="/" element={<Home/>}/>
