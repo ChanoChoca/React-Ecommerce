@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ChanoChoca.github.io/React-Ecommerce",
+  "homepage": "https://ChanoChoca.github.com/React-Ecommerce",
   "scripts": {
     "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "deploy" : "gh-pages -d dist",
 
     "dev": "vite",
     "build": "vite build",
