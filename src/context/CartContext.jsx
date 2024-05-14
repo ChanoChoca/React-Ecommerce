@@ -16,19 +16,27 @@ const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    //esto del use effect y local storage NO ENTRE EN EL FINAL, ES OPTATIVO
+    // Optional: load cart from local storage on component mount
     useEffect(() => {
-        const cart = JSON.parse(localStorage.getItem("cart"));
-        if (cart) {
-            setCart(cart);
-            setTotalQty(cart.reduce((acc, elem) => acc + elem.qty, 0));
-            setTotalPrice(cart.reduce((acc, elem) => acc + elem.price * elem.qty, 0));
+        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        if (storedCart) {
+            setCart(storedCart);
+            setTotalQty(storedCart.reduce((acc, elem) => acc + elem.qty, 0));
+            setTotalPrice(
+                storedCart.reduce((acc, elem) => acc + elem.price * elem.qty, 0)
+            );
         }
     }, []);
 
+    const roundToTwoDecimals = (num) => {
+        return Math.round(num * 100) / 100;
+    };
+
     const addToCart = (item, qty) => {
-        setTotalQty(totalQty + qty);
-        setTotalPrice(totalPrice + item.price * qty);
+        setTotalQty((prevQty) => prevQty + qty);
+        setTotalPrice((prevPrice) =>
+            roundToTwoDecimals(prevPrice + item.price * qty)
+        );
         let newCart = [];
 
         if (isInCart(item.id)) {
@@ -49,28 +57,38 @@ const CartContextProvider = ({ children }) => {
     };
 
     const addItem = (id, price) => {
-        const updatedCart = cart.map(item => {
-            if (item.id === id) {
-                return { ...item, qty: item.qty + 1 };
-            }
-            return item;
-        });
-        setCart(updatedCart);
-        setTotalQty(totalQty + 1);
-        setTotalPrice(totalPrice + price);
-        setCartToLocalStorage(updatedCart);
+        const itemToAdd = cart.find((item) => item.id === id);
+
+        if (!itemToAdd.stock || itemToAdd.qty < itemToAdd.stock) {
+            const updatedCart = cart.map((item) => {
+                if (item.id === id) {
+                    return { ...item, qty: item.qty + 1 };
+                }
+                return item;
+            });
+            setCart(updatedCart);
+            setTotalQty((prevQty) => prevQty + 1);
+            setTotalPrice((prevPrice) =>
+                roundToTwoDecimals(prevPrice + price)
+            );
+            setCartToLocalStorage(updatedCart);
+        } else {
+            console.log("¡No hay suficiente stock para agregar este producto!");
+        }
     };
 
     const removeOneItem = (id, price) => {
-        const updatedCart = cart.map(item => {
+        const updatedCart = cart.map((item) => {
             if (item.id === id && item.qty > 1) {
                 return { ...item, qty: item.qty - 1 };
             }
             return item;
         });
         setCart(updatedCart);
-        setTotalQty(totalQty - 1);
-        setTotalPrice(totalPrice - price);
+        setTotalQty((prevQty) => prevQty - 1);
+        setTotalPrice((prevPrice) =>
+            roundToTwoDecimals(prevPrice - price)
+        );
         setCartToLocalStorage(updatedCart);
     };
 
@@ -79,11 +97,12 @@ const CartContextProvider = ({ children }) => {
     };
 
     const removeItem = (id, price, qty) => {
-        console.log(price, qty);
-        setTotalPrice(totalPrice - price * qty);
-        setTotalQty(totalQty - qty);
+        setTotalPrice((prevPrice) =>
+            roundToTwoDecimals(prevPrice - price * qty)
+        );
+        setTotalQty((prevQty) => prevQty - qty);
 
-        /* devuelve todos los elementos que pasan la condición especificada */
+        // Remove the item from the cart
         const newCart = cart.filter((elem) => elem.id !== id);
 
         setCart(newCart);
@@ -98,7 +117,6 @@ const CartContextProvider = ({ children }) => {
     };
 
     const setCartToLocalStorage = (cartToSave) => {
-        //lo convierte a JSON y lo manda a localstorage
         localStorage.setItem("cart", JSON.stringify(cartToSave));
     };
 
@@ -113,7 +131,7 @@ const CartContextProvider = ({ children }) => {
         removeOneItem
     };
 
-    return <Provider value={contextValue}>{children}</Provider>
-}
+    return <Provider value={contextValue}>{children}</Provider>;
+};
 
 export default CartContextProvider;

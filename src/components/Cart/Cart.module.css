@@ -13,3 +13,8 @@
     border: 2px solid rgb(242, 100, 2) !important;
     box-shadow: none;
 }
+
+.table {
+    margin-bottom: 0;
+    background-color: rgb(249, 245, 225) !important;
+}

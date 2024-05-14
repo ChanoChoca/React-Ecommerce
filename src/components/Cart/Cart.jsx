@@ -26,13 +26,14 @@ export const Cart = () => {
 
     return (
         <>
-            <Table striped bordered hover>
+            <Table striped bordered hover variant="dark" style={{marginBottom: 0}} className={"text-center"}>
                 <thead>
                 <tr>
                     <th></th>
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Subtotal</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -40,11 +41,14 @@ export const Cart = () => {
                 {cart?.map(({ id, image, name, price, qty }, index) => {
                     return (
                         <tr key={index}>
-                            <td className={"col-2"}><img  src={image} alt={name} /></td>
-                            <td>{name}</td>
-                            <td className={"col-1"}>{price}</td>
-                            <td className={"col-1"}>{qty}</td>
-                            <td className={"d-grid gap-2 col"}>
+                            <td className="col-2 p-0">
+                                <img src={image} className="w-100" style={{height: '176px'}} alt={name} />
+                            </td>
+                            <td className={"lead"}>{name}</td>
+                            <td className="col-1">{price} USD</td>
+                            <td className="col-1">{qty}</td>
+                            <td className="col-1">{price * qty} USD</td>
+                            <td className="d-grid justify-content-center gap-2">
                                 <button className={styles.btn_pseudoclase} onClick={() => handleAddItem(id, price)}>
                                     Agregar uno
                                 </button>
@@ -59,12 +63,13 @@ export const Cart = () => {
                     );
                 })}
                 <tr>
-                    <td colSpan={4}>Precio total</td>
-                    <td> ${totalPrice}</td>
+                    <td className={"fw-bold"}>Precio total</td>
+                    <td> ${totalPrice} USD</td>
+                    <td colSpan={4}><button className={styles.btn_pseudoclase} onClick={handleClearCart}>Vaciar carrito</button></td>
                 </tr>
                 </tbody>
             </Table>
-            <button className={styles.btn_pseudoclase} onClick={handleClearCart}>Vaciar carrito</button>
         </>
+
     );
 };
