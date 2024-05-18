@@ -17,5 +17,10 @@ h5, h6, p, a, button, input, textarea, label {
 }
 
 body {
-    background-color: #1c1c1e;
+    background-color: #1c1c1e !important;
+}
+
+input:focus, textarea:focus {
+    border-color: #ff7e00 !important;
+    box-shadow: 0 0 0 0.2rem #ff7e00 !important;
 }

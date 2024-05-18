@@ -13,3 +13,7 @@
     border: 2px solid rgb(242, 100, 2) !important;
     box-shadow: none;
 }
+
+.text {
+    color: rgb(249, 245, 225);
+}

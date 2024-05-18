@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./Home.module.css";
 import {Link} from "react-router-dom";
+import {importProductsFromMock} from "../../utils/importProducts.js";
 
 export const Home = () => {
     const settings = {
@@ -24,29 +25,33 @@ export const Home = () => {
     return (
         <main>
 
-            <h2 className={"text-center pt-5"}>¡Bienvenido a Chano Upgrade!</h2>
+            <h2 className={"text-center pt-5 " + styles.text_color}>¡Bienvenido a Chano Upgrade!</h2>
 
             <section className={"overflow-hidden mt-5"}>
                 <Slider {...settings}>
                     <div className={"d-flex flex-column align-items-center"}>
                         <img src={marks} style={{width: '50vw', height: '50vh'}} alt={marks}/>
-                        <p className={"lead pt-3"}>Brindamos 3 marcas a los tanques que quieras</p>
+                        <p className={"lead pt-3 " + styles.text_color}>Brindamos 3 marcas a los tanques que quieras</p>
                     </div>
                     <div className={"d-flex flex-column align-items-center"}>
                         <img src={resources} style={{width: '50vw', height: '50vh'}} alt={resources}/>
-                        <p className={"lead pt-3"}>Ofrecemos oro, créditos, bonos y experiencia (libre o de tanque)</p>
+                        <p className={"lead pt-3 " + styles.text_color}>Ofrecemos oro, créditos, bonos y experiencia (libre o de tanque)</p>
                     </div>
                     <div className={"d-flex flex-column align-items-center"}>
                         <img src={tanks} style={{width: '50vw', height: '50vh'}} alt={tanks}/>
-                        <p className={"lead pt-3"}>Investigamos tanques de campaña, o de recompensa, o de línea por tí</p>
+                        <p className={"lead pt-3 " + styles.text_color}>Investigamos tanques de campaña, o de recompensa, o de línea por tí</p>
                     </div>
                 </Slider>
             </section>
 
-            <section></section>
-
             <section className={"text-center mt-5"}>
-                <p className={"lead"}>¡Te invitamos a explorar nuestro catalogo de productos!</p>
+                <button onClick={importProductsFromMock} className={styles.btn_pseudoclase}>
+                    Agregar productos desde mock
+                </button>
+            </section>
+
+            <section className={"text-center my-5"}>
+                <p className={"lead " + styles.text_color}>¡Te invitamos a explorar nuestro catalogo de productos!</p>
                 <Link to="/products" className={styles.btn_pseudoclase}>Ver Productos</Link>
             </section>
         </main>

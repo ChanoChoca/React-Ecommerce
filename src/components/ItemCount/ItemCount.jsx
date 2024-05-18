@@ -32,7 +32,7 @@ export const ItemCount = ({stock, initial, handleAddToCart}) => {
             <div>
                 <div>
                     <button onClick={handleSub} className={"me-1 " + styles.btn_pseudoclase}> - </button>
-                    <span>{cantItems}</span>
+                    <span className={styles.text}>{cantItems}</span>
                     <button onClick={handleAdd} className={"ms-1 " + styles.btn_pseudoclase} > + </button>
                 </div>
             </div>

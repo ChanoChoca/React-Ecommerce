@@ -19,10 +19,10 @@ export const ItemDetail = (item) => {
                     <img src={image}  alt={name}/>
                 </div>
                 <div className={"col p-0 align-self-center text-center"}>
-                    <h2>{name}</h2>
-                    <p>Precio: {price}</p>
-                    <div style={{display: stock !== undefined ? 'inline' : 'none'}}>
-                        <p>Stock: {stock}</p>
+                    <h2 className={styles.color_text}>{name}</h2>
+                    <p className={styles.color_text}>Precio: {price}</p>
+                    <div style={{display: stock ? 'inline' : 'none'}}>
+                        <p className={styles.color_text}>Stock: {stock}</p>
                     </div>
                     <ItemCount stock={stock}
                                initial={1}
@@ -30,7 +30,7 @@ export const ItemDetail = (item) => {
                 </div>
             </div>
             <div>
-                <p className={"lead pt-5 text-center"}>{description}</p>
+                <p className={"lead pt-5 text-center " + styles.color_text}>{description}</p>
             </div>
         </main>
     // <Card className={"container " + styles.card}>

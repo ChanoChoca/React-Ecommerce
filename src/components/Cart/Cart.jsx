@@ -1,9 +1,15 @@
-import { useCartContext } from "../../context/CartContext.jsx";
 import Table from "react-bootstrap/Table";
+import { useCartContext } from "../../context/CartContext.jsx";
+import { useState } from "react";
+import { db } from "../../firebase/dbConnection.js";
+import { addDoc, collection, doc, writeBatch } from "firebase/firestore";
 import styles from "./Cart.module.css";
+import { Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 export const Cart = () => {
     const { cart, totalPrice, removeItem, clearCart, addItem, removeOneItem } = useCartContext();
+    const [formData, setFormData] = useState({ name: "", tel: "", email: "" });
 
     const handleRemoveItem = (id, price, qty) => {
         removeItem(id, price, qty);
@@ -14,9 +20,7 @@ export const Cart = () => {
     };
 
     const handleRemoveOneItem = (id, price, qty) => {
-        // Check if qty is already 1, if so, return without performing any operation
         if (qty === 1) return;
-
         removeOneItem(id, price);
     };
 
@@ -24,9 +28,62 @@ export const Cart = () => {
         clearCart();
     };
 
+    const updateStock = async (cartItems) => {
+        const batch = writeBatch(db);
+        const productsCollection = collection(db, "products");
+
+        cartItems.forEach(item => {
+            if (item.stock !== null) {
+                const productRef = doc(productsCollection, item.id);
+                batch.update(productRef, {
+                    stock: item.stock - item.qty
+                });
+            }
+        });
+
+        return batch.commit();
+    };
+
+    const handleSaveCart = (e) => {
+        e.preventDefault();
+        if (!formData.name || !formData.tel || !formData.email) {
+            alert("Por favor complete todos los campos del formulario.");
+            return;
+        }
+
+        console.log("Saving in Database");
+        console.log("formData", formData);
+        console.log("cart", cart);
+
+        const ordersCollection = collection(db, "orders");
+        const newOrder = {
+            buyer: formData,
+            items: cart,
+            date: new Date(),
+            total: totalPrice,
+        };
+
+        addDoc(ordersCollection, newOrder)
+            .then((doc) => {
+                alert("Compra realizada con éxito, su número de orden es: " + doc.id);
+                console.log(doc);
+                updateStock(cart)
+                    .then(() => {
+                        clearCart();
+                        setFormData({ name: "", tel: "", email: "" });
+                    })
+                    .catch((err) => console.log("Error updating stock: ", err));
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const handleOnChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
     return (
         <>
-            <Table striped bordered hover variant="dark" style={{marginBottom: 0}} className={"text-center"}>
+            <Table striped bordered hover variant="dark" style={{ marginBottom: 0 }} className={"text-center"}>
                 <thead>
                 <tr>
                     <th></th>
@@ -42,7 +99,7 @@ export const Cart = () => {
                     return (
                         <tr key={index}>
                             <td className="col-2 p-0">
-                                <img src={image} className="w-100" style={{height: '176px'}} alt={name} />
+                                <img src={image} className="w-100" style={{ height: '176px' }} alt={name} />
                             </td>
                             <td className={"lead"}>{name}</td>
                             <td className="col-1">{price} USD</td>
@@ -64,12 +121,32 @@ export const Cart = () => {
                 })}
                 <tr>
                     <td className={"fw-bold"}>Precio total</td>
-                    <td> ${totalPrice} USD</td>
+                    <td>${totalPrice} USD</td>
                     <td colSpan={4}><button className={styles.btn_pseudoclase} onClick={handleClearCart}>Vaciar carrito</button></td>
                 </tr>
                 </tbody>
             </Table>
+            <span style={{ display: cart.length !== 0 ? 'inline' : 'none'}}>
+                <Form className={"py-5 " + styles.form} onSubmit={handleSaveCart}>
+                    <div className={"container text-center"}>
+                        <Form.Group className="mb-3">
+                            <Form.Label className={"lead"}>Nombre</Form.Label>
+                            <Form.Control type="text" name="name" placeholder="Ingresar nombre..." value={formData.name} onChange={handleOnChange} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label className={"lead"}>Teléfono</Form.Label>
+                            <Form.Control type="tel" name="tel" placeholder="Ingresar número telefónico..." value={formData.tel} onChange={handleOnChange} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label className={"lead"}>Email</Form.Label>
+                            <Form.Control type="email" name="email" placeholder="Ingresar email..." value={formData.email} onChange={handleOnChange} />
+                        </Form.Group>
+                        <Button className={styles.btn_pseudoclase} type="submit">
+                            Comprar
+                        </Button>
+                    </div>
+                </Form>
+            </span>
         </>
-
     );
 };

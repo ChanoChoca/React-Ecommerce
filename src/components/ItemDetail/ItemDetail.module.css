@@ -1,4 +1,7 @@
 main > *{
     background-color: #1c1c1e!important;
-    color: rgb(249, 245, 225) !important;
+}
+
+.color_text {
+    color: rgb(249, 245, 225) !important
 }

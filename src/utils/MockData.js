@@ -1,6 +1,6 @@
 export const products = [
     {
-        id: 1,
+        // id: 1,
         name: "Object 279 early",
         description: "El Object 279 early es un tanque pesado premium soviético de nivel 10.\n" +
             "\n" +
@@ -11,7 +11,7 @@ export const products = [
         image: "https://tanks.gg/img/tanks/ussr-R157_Object_279R.png"
     },
     {
-        id: 2,
+        // id: 2,
         name: "T95/FV4201 Chieftain",
         description: "El T95/FV4201 Chieftain es un tanque pesado premium británico de nivel 10.\n" +
             "\n" +
@@ -22,7 +22,7 @@ export const products = [
         image: "https://tanks.gg/img/tanks/uk-GB98_T95_FV4201_Chieftain.png"
     },
     {
-        id: 3,
+        // id: 3,
         name: "Object 907",
         description: "El Object 907 es un tanque mediano premium soviético de nivel 10.\n" +
             "\n" +
@@ -33,7 +33,7 @@ export const products = [
         image: "https://tanks.gg/img/tanks/ussr-R95_Object_907.png"
     },
     {
-        id: 4,
+        // id: 4,
         name: "VK 72.01 (K)",
         description: "El VK 72.01 (K) es un tanque pesado premium alemán de nivel 10.\n" +
             "\n" +
@@ -44,7 +44,7 @@ export const products = [
         image: "https://tanks.gg/img/tanks/germany-G92_VK7201.png"
     },
     {
-        id: 5,
+        // id: 5,
         name: "Object 260",
         description: "El Object 260 es un tanque pesado premium soviético de nivel 10.\n" +
             "\n" +
@@ -55,47 +55,47 @@ export const products = [
         image: "https://tanks.gg/img/tanks/ussr-R110_Object_260.png"
     },
     {
-        id: 6,
+        // id: 6,
         name: "WN8",
         description: "4000 WN8 por 10 batallas",
         price: 12.94,
-        stock: undefined,
+        stock: null,
         type: ["account_level"],
         image: "https://www.overtank.com/image/thumbnails/18/ff/wn8b_png-102392-380x380.png"
     },
     {
-        id: 7,
+        // id: 7,
         name:"Créditos y Experiencia",
         description: "1 millón de créditos + 30000 experiencia",
         price: 8.82,
-        stock: undefined,
+        stock: null,
         type: ["account_level"],
         image: "https://www.overtank.com/image/thumbnails/19/fd/silver_7_overtank_png-106455-380x380.png"
     },
     {
-        id: 8,
+        // id: 8,
         name: "Créditos",
         description: "1 millón de créditos",
         price: 5.95,
-        stock: undefined,
+        stock: null,
         type: ["account_level"],
         image: "https://www.overtank.com/image/thumbnails/18/fb/silver_normal_png_100455_380x380_png-102335-250x250.png"
     },
     {
-        id: 9,
+        // id: 9,
         name: "Experiencia",
         description: "50000 experiencia",
         price: 9.44,
-        stock: undefined,
+        stock: null,
         type: ["account_level"],
         image: "https://www.overtank.com/image/thumbnails/18/fc/anyxp_silver_png_100491_380x380_png-102336-250x250.png"
     },
     {
-        id: 10,
+        // id: 10,
         name: "Bonos",
         description: "100 bonos",
         price: 16.96,
-        stock: undefined,
+        stock: null,
         type: ["account_level"],
         image: "https://www.overtank.com/image/thumbnails/18/fb/bonds_png-102334-250x250.png"
     }

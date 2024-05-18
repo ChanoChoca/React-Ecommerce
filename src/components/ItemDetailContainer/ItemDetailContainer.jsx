@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import {getProductById} from "../../utils/MockData.js";
 import {Spinner} from "../spinner/Spinner.jsx";
 import {ItemDetail} from "../ItemDetail/ItemDetail.jsx";
+import { db } from "../../firebase/dbConnection.js";
+import { collection, getDoc, doc } from "firebase/firestore";
 
 export const ItemDetailContainer = () => {
     const { productId } = useParams();
@@ -11,15 +13,26 @@ export const ItemDetailContainer = () => {
 
     useEffect(() => {
         setLoading(true);
-        getProductById(productId)
-            .then((res) => {
-                setProduct(res);
+        const productsCollection = collection(db, "products");
+        const refDoc = doc(productsCollection, productId);
+
+        getDoc(refDoc)
+            .then((doc) => {
+                setProduct({id: doc.id, ...doc.data()});
                 setLoading(false);
-            })
-            .catch((err) => {
+            }).catch((err) => {
                 setLoading(false);
                 console.log(err);
-            });
+        });
+        // getProductById(productId)
+        //     .then((res) => {
+        //         setProduct(res);
+        //         setLoading(false);
+        //     })
+        //     .catch((err) => {
+        //         setLoading(false);
+        //         console.log(err);
+        //     });
     }, [productId]);
 
     return loading === true ? (

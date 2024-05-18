@@ -4,6 +4,8 @@ import { ItemList } from "../ItemList/ItemList.jsx";
 import { Spinner } from "../spinner/Spinner";
 import { useParams } from "react-router-dom";
 import { usePaginate } from "../../hooks/usePaginate";
+import { db } from "../../firebase/dbConnection.js";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import styles from "./ItemListContainer.module.css";
 
 export const ItemListContainer = ({ bgBlue, greeting }) => {
@@ -27,7 +29,46 @@ export const ItemListContainer = ({ bgBlue, greeting }) => {
     useEffect(() => {
         setLoading(true);
 
+        const productsCollection = collection(db, "products");
+
         if (categoryId) {
+            const cons = query(
+                productsCollection,
+                where("type", "array-contains", categoryId)
+            );
+
+            getDocs(cons)
+                .then(({ docs }) => {
+                    const prodFromDocs = docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    console.log(prodFromDocs);
+
+                    setProducts(prodFromDocs);
+                    setLoading(false);
+                    setCurrentPage(1); // Reiniciar la página actual al cambiar de categoría
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            getDocs(productsCollection)
+                .then(({ docs }) => {
+                    const prodFromDocs = docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+
+                    setProducts(prodFromDocs);
+                    setLoading(false);
+                    setCurrentPage(1); // Reiniciar la página actual al obtener todos los productos
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        /*if (categoryId) {
             getProductsByCategory(categoryId).then((res) => {
                 setProducts(res);
                 setLoading(false);
@@ -43,7 +84,7 @@ export const ItemListContainer = ({ bgBlue, greeting }) => {
                 .catch((error) => {
                     console.log(error);
                 });
-        }
+        }*/
     }, [categoryId]);
 
     useEffect(() => {

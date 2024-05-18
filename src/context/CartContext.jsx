@@ -59,7 +59,8 @@ const CartContextProvider = ({ children }) => {
     const addItem = (id, price) => {
         const itemToAdd = cart.find((item) => item.id === id);
 
-        if (!itemToAdd.stock || itemToAdd.qty < itemToAdd.stock) {
+        //if (!itemToAdd.stock || itemToAdd.qty < itemToAdd.stock) {
+        if (itemToAdd.stock === null || itemToAdd.qty < itemToAdd.stock) {
             const updatedCart = cart.map((item) => {
                 if (item.id === id) {
                     return { ...item, qty: item.qty + 1 };
