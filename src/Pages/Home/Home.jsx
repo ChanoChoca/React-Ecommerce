@@ -9,8 +9,21 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./Home.module.css";
 import {Link} from "react-router-dom";
 import {importProductsFromMock} from "../../utils/importProducts.js";
+import {deleteProducts} from "../../utils/deleteProducts.js";
+import {deleteOrders} from "../../utils/deleteOrders.js";
+import { useCartContext } from "../../context/CartContext.jsx";
 
 export const Home = () => {
+    const { cart, totalPrice, removeItem, clearCart, addItem, removeOneItem } = useCartContext();
+
+    const handleDeleteProductsAndClearCart = () => {
+        deleteProducts()
+            .then(() => {
+                clearCart();
+            })
+            .catch((err) => console.log("Error deleting products: ", err));
+    };
+
     const settings = {
         dots: true,
         infinite: true,
@@ -44,10 +57,20 @@ export const Home = () => {
                 </Slider>
             </section>
 
-            <section className={"text-center mt-5"}>
-                <button onClick={importProductsFromMock} className={styles.btn_pseudoclase}>
-                    Agregar productos desde mock
-                </button>
+            <section className={"container"}>
+                <div className={"d-grid gap-3"} style={{justifyItems: 'center'}}>
+                    <button style={{width: 'fit-content'}} onClick={importProductsFromMock} className={styles.btn_pseudoclase}>
+                        Agregar productos desde mock
+                    </button>
+
+                    <button style={{width: 'fit-content'}} onClick={handleDeleteProductsAndClearCart} className={styles.btn_pseudoclase}>
+                        Eliminar productos desde mock
+                    </button>
+
+                    <button style={{width: 'fit-content'}} onClick={deleteOrders} className={styles.btn_pseudoclase}>
+                        Eliminar ordenes
+                    </button>
+                </div>
             </section>
 
             <section className={"text-center my-5"}>

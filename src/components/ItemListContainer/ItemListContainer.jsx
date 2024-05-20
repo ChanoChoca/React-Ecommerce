@@ -102,7 +102,7 @@ export const ItemListContainer = ({ bgBlue, greeting }) => {
     return (
         <main>
             {!loading && (
-                <h1 className={"text-center pb-5"}>{greeting ? greeting : defaultTitle}</h1>
+                <h1 className={"text-center pb-5 " + styles.text_color}>{greeting ? greeting : defaultTitle}</h1>
             )}
             {loading === true ? (
                 <Spinner />

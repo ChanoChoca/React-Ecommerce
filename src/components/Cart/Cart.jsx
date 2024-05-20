@@ -99,7 +99,7 @@ export const Cart = () => {
                     return (
                         <tr key={index}>
                             <td className="col-2 p-0">
-                                <img src={image} className="w-100" style={{ height: '176px' }} alt={name} />
+                                <img src={image} className="w-100" style={{ height: '173.6px' }} alt={name} />
                             </td>
                             <td className={"lead"}>{name}</td>
                             <td className="col-1">{price} USD</td>
