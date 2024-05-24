@@ -1,7 +1,7 @@
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase/dbConnection";
+import {addDoc, collection} from "firebase/firestore";
+import {db} from "../firebase/dbConnection";
 
-import { products } from "./MockData";
+import {products} from "./MockData";
 
 export const importProductsFromMock = () => {
     const productsCollection = collection(db, "products");

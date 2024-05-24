@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import {importProductsFromMock} from "../../utils/importProducts.js";
 import {deleteProducts} from "../../utils/deleteProducts.js";
 import {deleteOrders} from "../../utils/deleteOrders.js";
-import { useCartContext } from "../../context/CartContext.jsx";
+import {useCartContext} from "../../context/CartContext.jsx";
 
 export const Home = () => {
     const { cart, totalPrice, removeItem, clearCart, addItem, removeOneItem } = useCartContext();
@@ -73,7 +73,7 @@ export const Home = () => {
                 </div>
             </section>
 
-            <section className={"text-center my-5"}>
+            <section className={"text-center mt-5 pb-5"}>
                 <p className={"lead " + styles.text_color}>¡Te invitamos a explorar nuestro catalogo de productos!</p>
                 <Link to="/products" className={styles.btn_pseudoclase}>Ver Productos</Link>
             </section>

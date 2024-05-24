@@ -99,13 +99,6 @@ export const products = [
         type: ["account_level"],
         image: "https://www.overtank.com/image/thumbnails/18/fb/bonds_png-102334-250x250.png"
     }
-    /*
-    {id:"5", name:"WN8", type:"MejoraDeCuenta", price:12.94, stock:undefined, description:"12.94 USD * 10 batallas"},
-    {id:"6", name:"Créditos y Experiencia", type:"MejoraDeCuenta", price:8.82, stock:undefined, description:"8.82 USD * (1M créditos + 30K experiencia)"},
-    {id:"7", name:"Créditos", type:"MejoraDeCuenta", price:5.95, stock:undefined, description:"5.95 USD * 1M créditos"},
-    {id:"8", name:"Experiencia", type:"MejoraDeCuenta", price:9.44, stock:undefined, description:"9.44 USD * 50K experiencia"},
-    {id:"9", name:"Bonos", type:"MejoraDeCuenta", price:16.96, stock:undefined, description:"16.96 USD * 100 bonos"}
-     */
 ]
 
 

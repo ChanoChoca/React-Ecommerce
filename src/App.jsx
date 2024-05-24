@@ -1,13 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.module.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navigation } from "./components/Layout/Navigation/Navigation.jsx";
-import { Footer } from "./components/Layout/Footer/Footer.jsx";
-import { ItemListContainer } from "./components/ItemListContainer/ItemListContainer.jsx";
-import { Cart } from "./components/Cart/Cart.jsx";
-import { Error } from "./components/Error/Error.jsx";
-import { Home } from "./Pages/Home/Home.jsx";
-import { ItemDetailContainer } from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer.jsx";
+import {Cart} from "./components/Cart/Cart.jsx";
+import {Error} from "./components/Error/Error.jsx";
+import {Home} from "./Pages/Home/Home.jsx";
+import {ItemDetailContainer} from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
 import {Layout} from "./components/Layout/Layout.jsx";
 import {Dashboard} from "./components/Dashboard/Dashboard.jsx";
 import {useEffect} from "react";

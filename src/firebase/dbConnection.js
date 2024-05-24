@@ -1,18 +1,18 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import {initializeApp} from "firebase/app";
+import {getFirestore} from "firebase/firestore";
+import {getStorage} from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCuKhNCH6GI7M5ZODxV6aqa64GquNdl4js",
-    authDomain: "worldoftanks-app.firebaseapp.com",
-    projectId: "worldoftanks-app",
-    storageBucket: "worldoftanks-app.appspot.com",
-    messagingSenderId: "252357144338",
-    appId: "1:252357144338:web:5dba065b1b7d3631d3cdcb"
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_ID
 };
 
 // Initialize Firebase

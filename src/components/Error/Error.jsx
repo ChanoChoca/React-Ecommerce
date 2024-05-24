@@ -1,4 +1,5 @@
 import logo from "../../assets/error/error.jpg";
+
 export const Error = () => {
     return (
         <div className={"overflow-x-hidden text-center"}>

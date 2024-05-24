@@ -18,3 +18,7 @@
 .text_color {
     color: rgb(249, 245, 225);
 }
+
+main {
+    background-color: #1c1c1e !important;
+}

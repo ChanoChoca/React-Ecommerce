@@ -1,5 +1,5 @@
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebase/dbConnection";
+import {collection, deleteDoc, doc, getDocs} from "firebase/firestore";
+import {db} from "../firebase/dbConnection";
 
 export const deleteProducts = () => {
     const productsCollection = collection(db, "products");

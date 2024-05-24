@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import styles from "./Navigation.module.css";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
 import logo from "../../../assets/logo.png";
 import { CartWidget } from "../../CartWidget/CartWidget";
-import { Link } from "react-router-dom";
+import styles from "./Navigation.module.css";
 
 export const Navigation = () => {
     const [showNav, setShowNav] = useState(true);
@@ -14,11 +14,10 @@ export const Navigation = () => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY;
-            /* scroll hacia arriba o posición actual de scroll <= 85px  */
             const visible = prevScrollPos > currentScrollPos || currentScrollPos <= 85;
 
-            setShowNav(visible); // Actualizar el estado de visibilidad
-            setPrevScrollPos(currentScrollPos); // Actualizar la posición anterior de scroll
+            setShowNav(visible);
+            setPrevScrollPos(currentScrollPos);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -26,14 +25,17 @@ export const Navigation = () => {
     }, [prevScrollPos]);
 
     return (
-        <header style={{marginBottom: 85}}>
-            <Navbar style={{
-                transform: showNav ? "translateY(0)" : "translateY(-100%)",
-                transition: "transform 0.5s ease-in-out"
-            }} className={"position-fixed top-0 z-1 w-100 p-0 pe-5"}>
+        <header style={{ marginBottom: 85 }}>
+            <Navbar
+                style={{
+                    transform: showNav ? "translateY(0)" : "translateY(-100%)",
+                    transition: "transform 0.5s ease-in-out",
+                }}
+                className="position-fixed top-0 z-1 w-100 p-0 pe-5"
+            >
                 <Container>
-                    <Navbar.Brand href="/">
-                        <img src={logo} alt="" className={styles.navbar__logo}/>
+                    <Navbar.Brand as={Link} to="/">
+                        <img src={logo} alt="Logo" className={styles.navbar__logo} />
                     </Navbar.Brand>
                     <Nav className="gap-3">
                         <Link to="/" className={styles.nav_link}>Inicio</Link>
@@ -45,9 +47,8 @@ export const Navigation = () => {
                         <Link to="/dashboard" className={styles.nav_link}>Dash</Link>
                     </Nav>
                 </Container>
-                <CartWidget/>
+                <CartWidget />
             </Navbar>
         </header>
     );
-}
-
+};

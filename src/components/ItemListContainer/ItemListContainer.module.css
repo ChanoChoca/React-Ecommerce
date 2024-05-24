@@ -14,3 +14,7 @@
 .text_color {
     color: #f9f5e1;
 }
+
+main {
+    background-color: #1c1c1e !important;
+}

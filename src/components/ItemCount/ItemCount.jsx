@@ -1,47 +1,45 @@
-import {useState} from "react";
+import { useState } from "react";
 import styles from "./ItemCount.module.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const ItemCount = ({stock, initial, handleAddToCart}) => {
+export const ItemCount = ({ stock, initial, handleAddToCart }) => {
     const navigate = useNavigate();
-    const [cantItems, setCantItems] = useState(0);
-    const [addedProduct, setAddedProduct] = useState(false);
+    const [state, setState] = useState({ cantItems: 0, addedProduct: false });
 
     const handleAdd = () => {
-        setCantItems(cantItems + 1)
+        setState(prevState => ({ ...prevState, cantItems: prevState.cantItems + 1 }));
     };
 
     const handleSub = () => {
-        if (cantItems > 0) {
-            setCantItems(cantItems - 1)
-        }
+        setState(prevState => ({ ...prevState, cantItems: Math.max(prevState.cantItems - 1, 0) }));
     };
 
     const handleFinishBuy = () => {
-        setAddedProduct(false);
+        setState(prevState => ({ ...prevState, addedProduct: false }));
         navigate("/cart");
     };
 
     const handleAgregarAlCarrito = () => {
-        setAddedProduct(true);
-        handleAddToCart(cantItems);
+        setState(prevState => ({ ...prevState, addedProduct: true }));
+        handleAddToCart(state.cantItems);
     };
 
     return (
         <>
             <div>
                 <div>
-                    <button onClick={handleSub} className={"me-1 " + styles.btn_pseudoclase}> - </button>
-                    <span className={styles.text}>{cantItems}</span>
-                    <button onClick={handleAdd} className={"ms-1 " + styles.btn_pseudoclase} > + </button>
+                    <button onClick={handleSub} className={`me-1 ${styles.btn_pseudoclase}`}> - </button>
+                    <span className={styles.text}>{state.cantItems}</span>
+                    <button onClick={handleAdd} className={`ms-1 ${styles.btn_pseudoclase}`}> + </button>
                 </div>
             </div>
 
-            {addedProduct ? (
-                <button onClick={handleFinishBuy} className={"mt-3 " + styles.btn_pseudoclase}>Terminar Compra</button>
-            ) : (
-                <button onClick={handleAgregarAlCarrito} className={"mt-3 " + styles.btn_pseudoclase}>Agregar al carrito</button>
-            )}
+            <button
+                onClick={state.addedProduct ? handleFinishBuy : handleAgregarAlCarrito}
+                className={`mt-3 ${styles.btn_pseudoclase}`}
+            >
+                {state.addedProduct ? "Terminar Compra" : "Agregar al carrito"}
+            </button>
         </>
     );
-}
+};

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const usePaginate = (data, itemsPerPage, currentPage, setCurrentPage) => {
     const totalPages = Math.ceil(data.length / itemsPerPage);
 
