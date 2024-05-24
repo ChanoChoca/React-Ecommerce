@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import './App.module.css'
+import './App.module.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer.jsx";
 import {Cart} from "./components/Cart/Cart.jsx";
