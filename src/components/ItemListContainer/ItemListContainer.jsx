@@ -70,36 +70,42 @@ export const ItemListContainer = ({ bgBlue, greeting }) => {
         <main>
             {!loading && (
                 <h1 className={`text-center pb-5 ${styles.text_color}`}>
-                    {greeting || defaultTitle}
+                    {products.length === 0 ? "No se encontraron productos" : (greeting || defaultTitle)}
                 </h1>
             )}
             {loading ? (
                 <Spinner />
             ) : (
-                <div>
-                    <ItemList productsList={currentData} />
-                    <div className="d-flex column-gap-1 justify-content-center mt-5 pb-5">
-                        <button className={styles.button} onClick={prevPage} disabled={currentPage === 1}>
-                            Ant Página
-                        </button>
-                        {totalPagesArray.map((page) =>
-                            page < 6 || page === totalPages ? (
-                                <button
-                                    className={`${styles.button} ${page === currentPage ? styles.currentPage : ""}`}
-                                    key={page}
-                                    onClick={() => paginate(page)}
-                                >
-                                    {page}
-                                </button>
-                            ) : (
-                                page === 6 && <span key="ellipsis">...</span>
-                            )
-                        )}
-                        <button className={styles.button} onClick={nextPage} disabled={currentPage === totalPages}>
-                            Sig Página
-                        </button>
+                products.length > 0 && (
+                    <div>
+                        <ItemList productsList={currentData} />
+                        <div className="d-flex column-gap-1 justify-content-center mt-5 pb-5">
+                            <button className={styles.button} onClick={prevPage} disabled={currentPage === 1}>
+                                Ant Página
+                            </button>
+                            {totalPagesArray.map((page) =>
+                                page < 6 || page === totalPages ? (
+                                    <button
+                                        className={`${styles.button} ${page === currentPage ? styles.currentPage : ""}`}
+                                        key={page}
+                                        onClick={() => paginate(page)}
+                                    >
+                                        {page}
+                                    </button>
+                                ) : (
+                                    page === 6 && <span key="ellipsis" style={{color: 'rgb(242, 100, 2)', fontWeight: 'bolder'}}>. . .</span>
+                                )
+                            )}
+                            <button
+                                className={styles.button}
+                                onClick={nextPage}
+                                disabled={currentPage === totalPages}
+                            >
+                                Sig Página
+                            </button>
+                        </div>
                     </div>
-                </div>
+                )
             )}
         </main>
     );
