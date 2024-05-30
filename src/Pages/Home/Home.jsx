@@ -64,7 +64,7 @@ export const Home = () => {
                     </button>
 
                     <button style={{width: 'fit-content'}} onClick={handleDeleteProductsAndClearCart} className={styles.btn_pseudoclase}>
-                        Eliminar productos desde mock
+                        Eliminar productos
                     </button>
 
                     <button style={{width: 'fit-content'}} onClick={deleteOrders} className={styles.btn_pseudoclase}>
